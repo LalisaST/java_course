@@ -7,12 +7,8 @@ public class Task7 {
     }
 
     public static int rotateLeft(int n, int shift) {
-        if (n == 0) {
-            return 0;
-        }
-
-        if (n == 1) {
-            return 1;
+        if (n == 0 || n == 1) {
+            return n;
         }
 
         if (n < 0 || shift < 0) {
@@ -46,12 +42,8 @@ public class Task7 {
     }
 
     public static int rotateRight(int n, int shift) {
-        if (n == 0) {
-            return 0;
-        }
-
-        if (n == 1) {
-            return 1;
+        if (n == 0 || n == 1) {
+            return n;
         }
 
         if (n < 0 || shift < 0) {
