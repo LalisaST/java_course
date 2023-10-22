@@ -8,7 +8,6 @@ public class FaultyConnection implements Connection {
     static int counter = 0;
     public static int pool = 0;
 
-
     public FaultyConnection() {
         pool++;
     }
@@ -17,8 +16,8 @@ public class FaultyConnection implements Connection {
         return pool;
     }
 
-    public static int setPool() {
-        return pool = 0;
+    public static void setPool() {
+        pool = 0;
     }
 
     @Override

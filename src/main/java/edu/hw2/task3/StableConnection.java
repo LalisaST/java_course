@@ -16,8 +16,8 @@ public class StableConnection implements Connection {
         return pool;
     }
 
-    public static int setPool() {
-        return pool = 0;
+    public static void setPool() {
+        pool = 0;
     }
 
     @Override
