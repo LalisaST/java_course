@@ -9,7 +9,6 @@ public class StableConnection implements Connection {
 
     public StableConnection() {
         pool++;
-        LOGGER.info(pool);
     }
 
     public static int getPool() {
@@ -33,6 +32,5 @@ public class StableConnection implements Connection {
     public void close() {
         pool--;
         LOGGER.info("Connection close");
-        LOGGER.info(pool);
     }
 }

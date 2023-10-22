@@ -6,6 +6,7 @@ public class DefaultConnectionManager implements ConnectionManager {
     DefaultConnectionManager() {
         FaultyConnection.setPool();
         StableConnection.setPool();
+        counter = 0;
     }
 
     @Override
