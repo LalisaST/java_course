@@ -17,6 +17,10 @@ public class FaultyConnection implements Connection {
         return pool;
     }
 
+    public static int setPool() {
+        return pool = 0;
+    }
+
     @Override
     public void execute(String command) {
         if (command == null) {

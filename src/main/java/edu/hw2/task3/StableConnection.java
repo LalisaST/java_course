@@ -9,12 +9,16 @@ public class StableConnection implements Connection {
 
     public StableConnection() {
         pool++;
+        LOGGER.info(pool);
     }
 
     public static int getPool() {
         return pool;
     }
 
+    public static int setPool() {
+        return pool = 0;
+    }
 
     @Override
     public void execute(String command) {
@@ -29,5 +33,6 @@ public class StableConnection implements Connection {
     public void close() {
         pool--;
         LOGGER.info("Connection close");
+        LOGGER.info(pool);
     }
 }

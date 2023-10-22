@@ -3,6 +3,11 @@ package edu.hw2.task3;
 public class DefaultConnectionManager implements ConnectionManager {
     static int counter = 0;
 
+    DefaultConnectionManager() {
+        FaultyConnection.setPool();
+        StableConnection.setPool();
+    }
+
     @Override
     public Connection getConnection() {
         if (counter == 2) {

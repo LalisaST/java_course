@@ -9,7 +9,7 @@ public class Task4Test {
     @Test
     @DisplayName("Проверка Multiplication")
     void checkingMultiplication() {
-        assertThat(callingInfo().className()).isEqualTo("edu.hw2.Task4Test");
+        assertThat(callingInfo().className()).isEqualTo("edu.hw2.task4.Task4Test");
 
         assertThat(callingInfo().methodName()).isEqualTo("checkingMultiplication");
     }

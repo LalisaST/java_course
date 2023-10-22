@@ -32,7 +32,6 @@ public final class PopularCommandExecutor {
                     throw new ConnectionException(e.getMessage(), e);
                 }
             }
-            attempts--;
         }
     }
 }
