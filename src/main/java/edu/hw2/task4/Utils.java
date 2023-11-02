@@ -4,17 +4,13 @@ public class Utils {
     private Utils() {
     }
 
-    public static CallingInfo callingInfo() {
-        try {
-            throw new Throwable();
-        } catch (Throwable e) {
-            StackTraceElement[] stackTraceElements = e.getStackTrace();
-            StackTraceElement stackTraceElement = stackTraceElements[1];
+    public static CallingInfo callingInfo(Throwable throwable) {
+        StackTraceElement[] stackTraceElements = throwable.getStackTrace();
+        StackTraceElement stackTraceElement = stackTraceElements[0];
 
-            String className = stackTraceElement.getClassName();
-            String methodName = stackTraceElement.getMethodName();
+        String className = stackTraceElement.getClassName();
+        String methodName = stackTraceElement.getMethodName();
 
-            return new CallingInfo(className, methodName);
-        }
+        return new CallingInfo(className, methodName);
     }
 }

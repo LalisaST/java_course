@@ -7,10 +7,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task4Test {
     @Test
-    @DisplayName("Проверка Multiplication")
-    void checkingMultiplication() {
-        assertThat(callingInfo().className()).isEqualTo("edu.hw2.task4.Task4Test");
+    @DisplayName("Проверка callingInfo")
+    void checkingCallingInfo() {
+        try {
+            throw new Exception();
+        }catch (Exception e) {
+            assertThat(callingInfo(e).className()).isEqualTo("edu.hw2.task4.Task4Test");
 
-        assertThat(callingInfo().methodName()).isEqualTo("checkingMultiplication");
+            assertThat(callingInfo(e).methodName()).isEqualTo("checkingCallingInfo");
+        }
     }
 }
