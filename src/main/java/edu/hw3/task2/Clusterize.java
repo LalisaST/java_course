@@ -21,23 +21,25 @@ public class Clusterize {
 
         for (int i = 0; i < strWithoutSpaces.length(); i++) {
             char bracket = strWithoutSpaces.charAt(i);
-            if (bracket == '(') {
-                counter++;
-            } else if (bracket == ')') {
-                if (counter == 0) {
-                    throw new IllegalArgumentException();
-                }
 
-                counter--;
+            switch (bracket) {
+                case '(' -> counter++;
+                case ')' -> {
+                    if (counter == 0) {
+                        throw new IllegalArgumentException();
+                    }
 
-                if (counter == 0) {
-                    clusters.add(strWithoutSpaces.substring(startIndex, i + 1));
-                    startIndex = i + 1;
+                    counter--;
+
+                    if (counter == 0) {
+                        clusters.add(strWithoutSpaces.substring(startIndex, i + 1));
+                        startIndex = i + 1;
+                    }
                 }
-            } else {
-                throw new IllegalArgumentException();
+                default -> throw new IllegalArgumentException();
             }
         }
+
         if (counter != 0) {
             throw new IllegalArgumentException();
         }

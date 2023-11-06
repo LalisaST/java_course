@@ -1,36 +1,39 @@
 package edu.hw3.task1;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Atbash {
-    static HashMap<Character, Character> encoding = new HashMap<Character, Character>() {{
-        put('A', 'Z');
-        put('B', 'Y');
-        put('C', 'X');
-        put('D', 'W');
-        put('E', 'V');
-        put('F', 'U');
-        put('G', 'T');
-        put('H', 'S');
-        put('I', 'R');
-        put('J', 'Q');
-        put('K', 'P');
-        put('L', 'O');
-        put('M', 'N');
-        put('N', 'M');
-        put('O', 'L');
-        put('P', 'K');
-        put('Q', 'J');
-        put('R', 'I');
-        put('S', 'H');
-        put('T', 'G');
-        put('U', 'F');
-        put('V', 'E');
-        put('W', 'D');
-        put('X', 'C');
-        put('Y', 'B');
-        put('Z', 'A');
-    }};
+    static Map<Character, Character> encoding = new HashMap<>(){};
+
+    static {
+        encoding.put('A', 'Z');
+        encoding.put('B', 'Y');
+        encoding.put('C', 'X');
+        encoding.put('D', 'W');
+        encoding.put('E', 'V');
+        encoding.put('F', 'U');
+        encoding.put('G', 'T');
+        encoding.put('H', 'S');
+        encoding.put('I', 'R');
+        encoding.put('J', 'Q');
+        encoding.put('K', 'P');
+        encoding.put('L', 'O');
+        encoding.put('M', 'N');
+        encoding.put('N', 'M');
+        encoding.put('O', 'L');
+        encoding.put('P', 'K');
+        encoding.put('Q', 'J');
+        encoding.put('R', 'I');
+        encoding.put('S', 'H');
+        encoding.put('T', 'G');
+        encoding.put('U', 'F');
+        encoding.put('V', 'E');
+        encoding.put('W', 'D');
+        encoding.put('X', 'C');
+        encoding.put('Y', 'B');
+        encoding.put('Z', 'A');
+    }
 
     private Atbash() {
 

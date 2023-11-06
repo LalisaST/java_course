@@ -1,6 +1,7 @@
 package edu.hw3.task5;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class ParseContacts {
 
@@ -25,8 +26,8 @@ public class ParseContacts {
         Person[] parseContactsArray = new Person[contacts.length];
         for (int i = 0; i < contacts.length; i++) {
             if (contacts[i] != null) {
-                String person = contacts[i].trim();
-                String[] parsedFullName = person.split(" ");
+                String person = contacts[i];
+                String[] parsedFullName = person.split("\\s+");
                 if (parsedFullName[0].isEmpty()) {
                     throw new IllegalArgumentException();
                 }
@@ -50,29 +51,9 @@ public class ParseContacts {
     private void sorter(Person[] parseContactsArray, String sorting) {
 
         if (sorting.equals("ASC")) {
-            Arrays.sort(parseContactsArray, (a, b) -> {
-                if (a.surname() != null && b.surname() != null) {
-                    return a.surname().compareTo(b.surname());
-                } else if (a.surname() == null && b.surname() != null) {
-                    return a.name().compareTo(b.surname());
-                } else if (a.surname() != null) {
-                    return a.surname().compareTo(b.name());
-                } else {
-                    return a.name().compareTo(b.name());
-                }
-            });
+            Arrays.sort(parseContactsArray);
         } else if (sorting.equals("DESC")) {
-            Arrays.sort(parseContactsArray, (a, b) -> {
-                if (b.surname() != null && a.surname() != null) {
-                    return b.surname().compareTo(a.surname());
-                } else if (b.surname() == null && a.surname() != null) {
-                    return b.name().compareTo(a.surname());
-                } else if (b.surname() != null) {
-                    return b.surname().compareTo(a.name());
-                } else {
-                    return b.name().compareTo(a.name());
-                }
-            });
+            Arrays.sort(parseContactsArray, Comparator.reverseOrder());
         } else {
             throw new IllegalArgumentException();
         }

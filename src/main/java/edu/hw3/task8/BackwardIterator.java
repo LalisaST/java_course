@@ -14,7 +14,7 @@ public class BackwardIterator<T> implements Iterator<T> {
             throw new IllegalArgumentException();
         }
 
-        this.collection = new ArrayList<>(collection.stream().toList());
+        this.collection = new ArrayList<>(collection);
         this.index = collection.size() - 1;
     }
 
@@ -28,9 +28,7 @@ public class BackwardIterator<T> implements Iterator<T> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        T element = collection.get(index);
-        index--;
-        return element;
+        return collection.get(index--);
     }
 
 }
