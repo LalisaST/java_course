@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class Task4 {
     final static int ONE_HUNDRED = 100;
 
+    //Задача 1: Отсортировать животных по росту от самого маленького к самому большому -> List<Animal>
     public List<Animal> sortHeight(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -24,6 +25,7 @@ public class Task4 {
             .collect(Collectors.toList());
     }
 
+    //Задача 2: Отсортировать животных по весу от самого тяжелого к самому легкому, выбрать k первых -> List<Animal>
     public List<Animal> sortWeight(List<Animal> animals, int k) {
         if (animals == null || animals.size() < k || k < 0) {
             throw new IllegalArgumentException();
@@ -35,6 +37,7 @@ public class Task4 {
             .collect(Collectors.toList());
     }
 
+    //Задача 3: Сколько животных каждого вида -> Map<Animal.Type, Integer>
     public Map<Animal.Type, Integer> sortType(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -46,34 +49,34 @@ public class Task4 {
                 Animal::type, Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
     }
 
+    //Задача 4: У какого животного самое длинное имя -> Animal
     public Animal longName(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.name() != null)
+            .filter(animal -> animal != null && animal.name() != null)
             .max(Comparator.comparing(animal -> animal.name().length()))
             .orElse(null);
     }
 
+    //Задача 5: Каких животных больше: самцов или самок -> Sex
     public Animal.Sex maxSex(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
         long m = animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.sex() == Animal.Sex.M)
+            .filter(animal -> animal != null && animal.sex() == Animal.Sex.M)
             .count();
         long f = animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.sex() == Animal.Sex.F)
+            .filter(animal -> animal != null && animal.sex() == Animal.Sex.F)
             .count();
 
         return m > f ? Animal.Sex.M : Animal.Sex.F;
     }
 
+    //Задача 6: Самое тяжелое животное каждого вида -> Map<Animal.Type, Animal>
     public Map<Animal.Type, Animal> heaviestAnimals(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -89,6 +92,7 @@ public class Task4 {
                 ));
     }
 
+    //Задача 7: K-е самое старое животное -> Animal
     public Animal oldestAnimal(List<Animal> animals, int k) {
         if (animals == null || animals.size() < k || k < 0) {
             throw new IllegalArgumentException();
@@ -102,17 +106,18 @@ public class Task4 {
             .orElse(null);
     }
 
+    //Задача 8: Самое тяжелое животное среди животных ниже k см -> Optional<Animal>
     public Optional<Animal> heaviestAnimalBelowK(List<Animal> animals, int k) {
         if (animals == null || k < 0) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.height() < k)
+            .filter(animal -> animal != null && animal.height() < k)
             .max(Comparator.comparing(Animal::weight));
     }
 
+    //Задача 9: Сколько в сумме лап у животных в списке -> Integer
     public Integer sumPaws(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -120,56 +125,59 @@ public class Task4 {
 
         return animals.stream()
             .filter(Objects::nonNull)
-            .mapToInt(Animal::paws).sum();
+            .mapToInt(Animal::paws)
+            .sum();
     }
 
+    //Задача 10: Список животных, возраст у которых не совпадает с количеством лап -> List<Animal>
     public List<Animal> unsatisfiedPaws(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.age() != animal.paws())
+            .filter(animal -> animal != null && animal.age() != animal.paws())
             .collect(Collectors.toList());
     }
 
+    //Задача 11: Список животных, которые могут укусить (bites == true) и рост которых превышает 100 см -> List<Animal>
     public List<Animal> animalsCanBite(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.bites() && animal.height() > ONE_HUNDRED)
+            .filter(animal -> animal != null && animal.bites() && animal.height() > ONE_HUNDRED)
             .collect(Collectors.toList());
     }
 
+    //Задача 12: Сколько в списке животных, вес которых превышает рост -> Integer
     public Integer weightExceedsHeight(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return (int) animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.weight() > animal.height())
+            .filter(animal -> animal != null && animal.weight() > animal.height())
             .count();
 
     }
 
+    //Задача 13: Список животных, имена которых состоят из более чем двух слов -> List<Animal>
     public List<Animal> namesMoreThanTwoWords(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.name() != null)
-            .filter(animal -> animal.name().split(" ").length > 2)
+            .filter(animal -> animal != null
+                && animal.name() != null
+                && animal.name().split("\\s+").length > 2)
             .collect(Collectors.toList());
 
     }
 
+    //Задача 14: Есть ли в списке собака ростом более k см -> Boolean
     public Boolean dogWithHeightMoreThanK(List<Animal> animals, int k) {
         if (animals == null || k < 0) {
             throw new IllegalArgumentException();
@@ -180,28 +188,29 @@ public class Task4 {
             .anyMatch(animal -> animal.type() == Animal.Type.DOG && animal.height() > k);
     }
 
+    //Задача 15: Найти суммарный вес животных каждого вида, которым от k до l лет -> Map<Animal.Type, Integer>
     public Map<Animal.Type, Integer> totalWeightAnimals(List<Animal> animals, int k, int l) {
         if (animals == null || k < 0 || l < 0) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.age() >= k && animal.age() <= l)
+            .filter(animal -> animal != null && animal.age() >= k && animal.age() <= l)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
 
     }
 
+    //Задача 16: Список животных, отсортированный по виду, затем по полу, затем по имени -> List<Animal>
     public List<Animal> fullSorting(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
         }
 
         return animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.sex() != null)
-            .filter(animal -> animal.type() != null)
-            .filter(animal -> animal.name() != null)
+            .filter(animal -> animal != null
+                && animal.sex() != null
+                && animal.type() != null
+                && animal.name() != null)
             .sorted(Comparator
                 .comparing(Animal::type)
                 .thenComparing(Animal::sex)
@@ -210,6 +219,27 @@ public class Task4 {
 
     }
 
+    //Задача 17: Правда ли, что пауки кусаются чаще, чем собаки -> Boolean (если данных для ответа недостаточно, вернуть false)
+    public boolean spidersBitesMore(List<Animal> animals) {
+        if (animals == null) {
+            throw new IllegalArgumentException();
+        }
+
+        long spider = animals.stream()
+            .filter(animal -> animal != null
+                && animal.type() == Animal.Type.SPIDER
+                && animal.bites())
+            .count();
+        long dog = animals.stream()
+            .filter(animal -> animal != null
+                && animal.type() == Animal.Type.DOG
+                && animal.bites())
+            .count();
+
+        return spider > dog;
+    }
+
+    //Задача 18: Найти самую тяжелую рыбку в 2-х или более списках -> Animal
     public Animal heaviestFish(List<Animal>... animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -223,23 +253,7 @@ public class Task4 {
             .orElse(null);
     }
 
-    public boolean spidersBitesMore(List<Animal> animals) {
-        if (animals == null) {
-            throw new IllegalArgumentException();
-        }
-
-        long spider = animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites())
-            .count();
-        long dog = animals.stream()
-            .filter(Objects::nonNull)
-            .filter(animal -> animal.type() == Animal.Type.DOG && animal.bites())
-            .count();
-
-        return spider > dog;
-    }
-
+    //Задача 19: Животные, в записях о которых есть ошибки: вернуть имя и список ошибок -> Map<String, Set<ValidationError>>
     public Map<String, Set<ValidationError>> countErrors(List<Animal> animals) {
         return animals.stream()
             .filter(Objects::nonNull)
@@ -249,12 +263,18 @@ public class Task4 {
             ));
     }
 
+    //Задача 20: Сделать результат предыдущего задания более читабельным: вернуть имя и названия полей с ошибками, объединенные в строку -> Map<String, String>
     public Map<String, String> countErrorsModified(List<Animal> animals) {
         return animals.stream()
             .filter(Objects::nonNull)
             .collect(Collectors.toMap(
                 Animal::name,
-                ValidatorModified::validate
+                animal -> Validator
+                    .validate(animal)
+                    .stream()
+                    .map(Throwable::getMessage)
+                    .sorted()
+                    .collect(Collectors.joining(", "))
             ));
     }
 }

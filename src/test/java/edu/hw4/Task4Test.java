@@ -456,10 +456,10 @@ public class Task4Test {
 
         Map<String, String> mapResult = task4.countErrorsModified(animals);
 
-        assertThat(mapResult.get("A")).isEqualTo("Age: The age is set incorrectly, Height: Growth is incorrectly set");
-        assertThat(mapResult.get("Buddy")).isEqualTo("Age: The age is set incorrectly, Height: Growth is incorrectly set");
-        assertThat(mapResult.get("")).isEqualTo("Name: The name is set incorrectly, Weight: The weight is set incorrectly");
-        assertThat(mapResult.get("Goldy")).isEqualTo("Type: The type is set incorrectly");
-        assertThat(mapResult.get(null)).isEqualTo("Name: The name is set incorrectly, Sex: The sex is set incorrectly");
+        assertThat(mapResult.get("A")).isEqualTo("Growth is incorrectly set, The age is set incorrectly");
+        assertThat(mapResult.get("Buddy")).isEqualTo("Growth is incorrectly set, The age is set incorrectly");
+        assertThat(mapResult.get("")).isEqualTo("The name is set incorrectly, The weight is set incorrectly");
+        assertThat(mapResult.get("Goldy")).isEqualTo("The type is set incorrectly");
+        assertThat(mapResult.get(null)).isEqualTo("The name is set incorrectly, The sex is set incorrectly");
     }
 }
