@@ -219,7 +219,8 @@ public class Task4 {
 
     }
 
-    //Задача 17: Правда ли, что пауки кусаются чаще, чем собаки -> Boolean (если данных для ответа недостаточно, вернуть false)
+    //Задача 17: Правда ли, что пауки кусаются чаще, чем собаки -> Boolean (если данных для ответа недостаточно,
+    // вернуть false)
     public boolean spidersBitesMore(List<Animal> animals) {
         if (animals == null) {
             throw new IllegalArgumentException();
@@ -253,7 +254,8 @@ public class Task4 {
             .orElse(null);
     }
 
-    //Задача 19: Животные, в записях о которых есть ошибки: вернуть имя и список ошибок -> Map<String, Set<ValidationError>>
+    //Задача 19: Животные, в записях о которых есть ошибки: вернуть имя и список ошибок -> Map<String,
+    // Set<ValidationError>>
     public Map<String, Set<ValidationError>> countErrors(List<Animal> animals) {
         return animals.stream()
             .filter(Objects::nonNull)
@@ -263,7 +265,8 @@ public class Task4 {
             ));
     }
 
-    //Задача 20: Сделать результат предыдущего задания более читабельным: вернуть имя и названия полей с ошибками, объединенные в строку -> Map<String, String>
+    //Задача 20: Сделать результат предыдущего задания более читабельным: вернуть имя и названия полей с ошибками,
+    // объединенные в строку -> Map<String, String>
     public Map<String, String> countErrorsModified(List<Animal> animals) {
         return animals.stream()
             .filter(Objects::nonNull)
