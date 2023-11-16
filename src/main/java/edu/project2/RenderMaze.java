@@ -21,7 +21,7 @@ public class RenderMaze implements Renderer {
                     stringBuilder.append(WALL);
                 }
             }
-            stringBuilder.append("\n");
+            stringBuilder.append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
@@ -44,7 +44,7 @@ public class RenderMaze implements Renderer {
                     stringBuilder.append(WALL);
                 }
             }
-            stringBuilder.append("\n");
+            stringBuilder.append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }

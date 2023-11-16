@@ -1,11 +1,8 @@
 package edu.project2;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class AldousBroderMazeGenerator implements Generator {
-    private static final List<String> DIRECTIONS = Arrays.asList("N", "S", "E", "W");
     private static final int MIN_SIZE = 3;
     private static final int FOUR = 4;
     private static final Random RANDOM = new Random();
@@ -40,26 +37,26 @@ public class AldousBroderMazeGenerator implements Generator {
 
         while (visitedCells < counter) {
             int randomInd = RANDOM.nextInt(FOUR);
-            String direction = DIRECTIONS.get(randomInd);
+            Direction direction = Direction.values()[randomInd];
 
             Point a = new Point(p.y, p.x);
             int dx = 0;
             int dy = 0;
 
             switch (direction) {
-                case "N" -> {
+                case N -> {
                     dy = 1;
                     a.y += 2;
                 }
-                case "S" -> {
+                case S -> {
                     dy = -1;
                     a.y -= 2;
                 }
-                case "E" -> {
+                case E -> {
                     dx = 1;
                     a.x += 2;
                 }
-                case "W" -> {
+                case W -> {
                     dx = -1;
                     a.x -= 2;
                 }

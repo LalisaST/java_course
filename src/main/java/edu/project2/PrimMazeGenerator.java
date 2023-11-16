@@ -1,6 +1,7 @@
 package edu.project2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PrimMazeGenerator implements Generator {
@@ -32,17 +33,17 @@ public class PrimMazeGenerator implements Generator {
         return new Maze(height, width, maze);
     }
 
-    private ArrayList<Point> neighbors(Point p) {
-        ArrayList<Point> neighborList = new ArrayList<>();
-        neighborList.add(new Point(p.y, p.x + 1));
-        neighborList.add(new Point(p.y, p.x - 1));
-        neighborList.add(new Point(p.y - 1, p.x));
-        neighborList.add(new Point(p.y + 1, p.x));
-        return neighborList;
+    private List<Point> neighbors(Point p) {
+        return List.of(
+            new Point(p.y, p.x + 1),
+            new Point(p.y, p.x - 1),
+            new Point(p.y - 1, p.x),
+            new Point(p.y + 1, p.x)
+        );
     }
 
     private void newWalls(ArrayList<Point> walls, Point p, Cell[][] maze, int n, int m) {
-        ArrayList<Point> nbrs = neighbors(p);
+        List<Point> nbrs = neighbors(p);
         for (Point a : nbrs) {
             if (0 < a.y && a.y < n - 1 && 0 < a.x && a.x < m - 1 && maze[a.y][a.x].type() != Cell.Type.PASSAGE) {
                 walls.add(a);
@@ -51,7 +52,7 @@ public class PrimMazeGenerator implements Generator {
     }
 
     private boolean breakWall(Point p, Cell[][] maze, int n, int m) {
-        ArrayList<Point> nbrs = neighbors(p);
+        List<Point> nbrs = neighbors(p);
         int whiteCount = 0;
         Point whiteNeighbor = null;
 
@@ -103,9 +104,8 @@ public class PrimMazeGenerator implements Generator {
             p.y = ny;
             p.x = nx;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private Cell[][] createMaze(int height, int width) {

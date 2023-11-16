@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SolverBFS implements Solver {
-    private static final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     @Override
     public List<Point> solve(Maze maze, Point start, Point end) {
@@ -34,15 +33,16 @@ public class SolverBFS implements Solver {
                 return backtrackPath(cur, parent);
             }
 
-            for (int[] direction : DIRECTIONS) {
+            for (Direction direction : Direction.values()) {
+                int[] dirs = direction.getMove();
                 Point point = new Point(
-                    cur.y + direction[0],
-                    cur.x + direction[1]
+                    cur.y + dirs[0],
+                    cur.x + dirs[1]
                 );
                 if (parent.containsValue(point)) {
                     continue;
                 }
-                parent.put(new Point(cur.y + direction[0], cur.x + direction[1]), cur);
+                parent.put(new Point(cur.y + dirs[0], cur.x + dirs[1]), cur);
                 path.add(point);
             }
         }

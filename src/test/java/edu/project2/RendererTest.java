@@ -36,15 +36,14 @@ public class RendererTest {
 
         String stringMazeTest = renderMaze.render(maze);
 
-        String stringMaze = """
-                █████████████████████
-                ███               ███
-                ███   ███   █████████
-                ███   ███   ███   ███
-                ███   █████████   ███
-                ███               ███
-                █████████████████████
-                """;
+        String stringMaze =
+            "█████████████████████" + System.lineSeparator() +
+            "███               ███" + System.lineSeparator() +
+            "███   ███   █████████" + System.lineSeparator() +
+            "███   ███   ███   ███" + System.lineSeparator() +
+            "███   █████████   ███" + System.lineSeparator() +
+            "███               ███" + System.lineSeparator() +
+            "█████████████████████" + System.lineSeparator();
         assertThat(stringMazeTest).isEqualTo(stringMaze);
     }
 
@@ -75,7 +74,8 @@ public class RendererTest {
         Maze maze = new Maze(7, 7, grid);
         RenderMaze renderMaze = new RenderMaze();
 
-        List<Point> path = List.of(new Point(1, 1),
+        List<Point> path = List.of(
+            new Point(1, 1),
             new Point(2, 1),
             new Point(2, 1),
             new Point(3, 1),
@@ -88,16 +88,16 @@ public class RendererTest {
         );
 
         String stringPathTest = renderMaze.render(maze, path);
+        System.out.println(stringPathTest);
 
-        String stringPath = """
-                █████████████████████
-                ███ ●             ███
-                ███ ● ███   █████████
-                ███ ● ███   ███   ███
-                ███ ● █████████   ███
-                ███ ●  ●  ●  ●  ● ███
-                █████████████████████
-                """;
+        String stringPath =
+            "█████████████████████" + System.lineSeparator() +
+            "███ ●             ███" + System.lineSeparator() +
+            "███ ● ███   █████████" + System.lineSeparator() +
+            "███ ● ███   ███   ███" + System.lineSeparator() +
+            "███ ● █████████   ███" + System.lineSeparator() +
+            "███ ●  ●  ●  ●  ● ███" + System.lineSeparator() +
+            "█████████████████████" + System.lineSeparator();
         assertThat(stringPathTest).isEqualTo(stringPath);
     }
 
