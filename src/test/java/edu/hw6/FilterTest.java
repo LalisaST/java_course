@@ -32,21 +32,25 @@ public class FilterTest {
             .and(Filter.magicNumber(0x47));
 
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(Path.of("src", "test", "res"), filter)) {
-            entries.forEach(path -> assertThat(path.toString()).isEqualTo("src\\test\\res\\forest-gump-wave.gif"));
+            entries.forEach(path -> assertThat(path).isEqualTo(Path.of(
+                "src",
+                "test",
+                "res",
+                "forest-gump-wave.gif"
+            )));
         }
-
 
     }
 
     @Test
     @DisplayName("Ввод некорректных аргументов")
-    void enteringIncorrectArguments() throws IOException {
+    void enteringIncorrectArguments() {
         assertThatThrownBy(() -> Filter.globMatches(null)).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> Filter.regexContains(null)).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> Filter.readable().and(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @AfterAll static void deleteFile(){
+    @AfterAll static void deleteFile() {
         try {
             Files.delete(Path.of("src", "test", "res", "testTask3.txt"));
         } catch (IOException e) {
