@@ -4,15 +4,16 @@ public enum Direction {
     N {
         @Override
         public int[] getMove() {
-            return new int[] {1, 0};
+            return new int[] {-1, 0};
         }
     },
     S {
         @Override
         public int[] getMove() {
-            return new int[] {-1, 0};
+            return new int[] {1, 0};
         }
     },
+
     E {
         @Override
         public int[] getMove() {
@@ -23,7 +24,7 @@ public enum Direction {
     W {
         @Override
         public int[] getMove() {
-            return new int[] {-1, 0};
+            return new int[] {0, -1};
         }
     };
 
