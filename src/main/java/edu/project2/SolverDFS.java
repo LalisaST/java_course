@@ -45,7 +45,7 @@ public class SolverDFS implements Solver {
             }
         }
 
-        path.remove(path.size() - 1);
+        path.removeLast();
         return false;
     }
 
