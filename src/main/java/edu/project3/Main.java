@@ -7,7 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String logPath = getOptionValue(args, "--path");
+        // String logPath = getOptionValue(args, "--path");
+        String logPath = "src/main/resources/abobaLog.txt";
 
         String from = getOptionValue(args, "--from");
         String to = getOptionValue(args, "--to");
@@ -15,7 +16,7 @@ public class Main {
         String format = getOptionValue(args, "--format", "markdown");
 
         LogAnalyzer logAnalyzer = new LogAnalyzer();
-        logAnalyzer.analyzeLogs(logPath, from, to, format);
+        logAnalyzer.analyzeLogs(logPath, from, to, "adoc");
     }
 
     private static String getOptionValue(String[] args, String option, String defaultValue) {

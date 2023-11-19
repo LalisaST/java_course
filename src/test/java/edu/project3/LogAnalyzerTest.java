@@ -24,7 +24,7 @@ public class LogAnalyzerTest {
         LogAnalyzer logAnalyzer = new LogAnalyzer();
         String validLogPath = "src/main/resources/abobaLog.txt";
 
-        logAnalyzer.analyzeLogs(validLogPath, null, null, "adoc");
+        logAnalyzer.analyzeLogs(validLogPath, null, "2023-08-31", "adoc");
 
         assertThat(logAnalyzer.getPaths()).isNotEmpty();
     }

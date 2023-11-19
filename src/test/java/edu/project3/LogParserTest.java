@@ -16,7 +16,9 @@ public class LogParserTest {
         assertThat(logRecord).isNotNull();
         assertThat(logRecord.remoteAddr()).isEqualTo("217.168.17.5");
         assertThat(logRecord.remoteUser()).isEqualTo("aboba");
-        assertThat(logRecord.request()).isEqualTo("GET /path HTTP/1.1");
+        assertThat(logRecord.method()).isEqualTo("GET");
+        assertThat(logRecord.request()).isEqualTo("/path");
+        assertThat(logRecord.version()).isEqualTo("HTTP/1.1");
         assertThat(logRecord.status()).isEqualTo(200);
         assertThat(logRecord.bodyBytesSent()).isEqualTo(1234);
         assertThat(logRecord.httpReferer()).isEqualTo("referer");

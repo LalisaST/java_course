@@ -35,6 +35,24 @@ public class LogReport {
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
+    public Map<String, Long> getTopRequestedMethods() {
+        return logRecords.get()
+            .collect(Collectors.groupingBy(LogRecord::method, Collectors.counting()))
+            .entrySet().stream()
+            .limit(MAX_SIZE_RESULT)
+            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    public Map<String, Long> getTopRequestedVersions() {
+        return logRecords.get()
+            .collect(Collectors.groupingBy(LogRecord::version, Collectors.counting()))
+            .entrySet().stream()
+            .limit(MAX_SIZE_RESULT)
+            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
     public Map<Integer, Long> getTopResponseStatusCodes() {
         return logRecords.get()
             .collect(Collectors.groupingBy(LogRecord::status, Collectors.counting()))

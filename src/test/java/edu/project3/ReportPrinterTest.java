@@ -39,7 +39,7 @@ public class ReportPrinterTest {
     @DisplayName("Ввод формата = null")
     void enteringFormatEqualNull() throws IOException {
         List<LogRecord> logRecords = List.of(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 100, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "HEAD", "/", "HTTP/1.1", 200, 100, "-", "userAgent")
         );
         LogReport validReport = new LogReport(logRecords);
         ReportsPrinter printer = new ReportsPrinter(null, validReport, List.of("path"));
@@ -51,7 +51,7 @@ public class ReportPrinterTest {
     @DisplayName("Проверка создания файла")
     void checkingFileCreation() throws IOException {
         List<LogRecord> logRecords = List.of(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 100, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "HEAD", "/", "HTTP/1.1", 200, 100, "-", "userAgent")
         );
         LogReport validReport = new LogReport(logRecords);
         new ReportsPrinter("adoc", validReport, List.of("path"));

@@ -62,8 +62,6 @@ public class LogAnalyzer {
 
     private List<LogRecord> getLogRecords(List<String> lines, String fromDate, String toDate) throws IOException {
         try {
-            lines.forEach(System.out::println);
-
             return lines.stream()
                 .map(LogParser::parse)
                 .filter(logRecord -> {

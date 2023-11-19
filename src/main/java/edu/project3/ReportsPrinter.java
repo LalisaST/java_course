@@ -50,6 +50,8 @@ public class ReportsPrinter {
         writingGeneralInformationToMarkdown(markdown, report, path);
         writingRequestedResourcesToMarkdown(markdown, report);
         writingResponseCodesToMarkdown(markdown, report);
+        writingRequestedMethodsToMarkdown(markdown, report);
+        writingRequestedVersionsToMarkdown(markdown, report);
 
         createFile(".md", markdown);
     }
@@ -100,6 +102,32 @@ public class ReportsPrinter {
         }
     }
 
+    private static void writingRequestedMethodsToMarkdown(StringBuilder stringBuilder, LogReport report) {
+        stringBuilder.append("#### Использованные методы")
+            .append(System.lineSeparator())
+            .append(System.lineSeparator());
+        stringBuilder.append("Метод | Количество").append(System.lineSeparator());
+        stringBuilder.append("|---|---|").append(System.lineSeparator());
+        for (Map.Entry<String, Long> entry : report.getTopRequestedMethods().entrySet()) {
+            stringBuilder.append(String.format("| `%s` | %,d |", entry.getKey(), entry.getValue()))
+                .append(System.lineSeparator());
+        }
+        stringBuilder.append(System.lineSeparator());
+    }
+
+    private static void writingRequestedVersionsToMarkdown(StringBuilder stringBuilder, LogReport report) {
+        stringBuilder.append("#### Использованные версии")
+            .append(System.lineSeparator())
+            .append(System.lineSeparator());
+        stringBuilder.append("Версия | Количество").append(System.lineSeparator());
+        stringBuilder.append("|---|---|").append(System.lineSeparator());
+        for (Map.Entry<String, Long> entry : report.getTopRequestedVersions().entrySet()) {
+            stringBuilder.append(String.format("| `%s` | %,d |", entry.getKey(), entry.getValue()))
+                .append(System.lineSeparator());
+        }
+        stringBuilder.append(System.lineSeparator());
+    }
+
     private static void printPaths(LogReport report, StringBuilder stringBuilder, List<String> path) {
 
         stringBuilder.append(String.format("|Файл(-ы) | %s", String.join(", ", path))
@@ -130,6 +158,8 @@ public class ReportsPrinter {
         writingGeneralInformationToAsciiDoc(asciiDoc, report, path);
         writingRequestedResourcesToAsciiDoc(asciiDoc, report);
         writingResponseCodesToAsciiDoc(asciiDoc, report);
+        writingRequestedMethodsToAsciiDoc(asciiDoc, report);
+        writingRequestedVersionsToAsciiDoc(asciiDoc, report);
 
         createFile(".adoc", asciiDoc);
     }
@@ -183,5 +213,37 @@ public class ReportsPrinter {
             )).append(System.lineSeparator());
         }
         stringBuilder.append("|====").append(System.lineSeparator());
+    }
+
+    private static void writingRequestedMethodsToAsciiDoc(StringBuilder stringBuilder, LogReport report) {
+        stringBuilder.append("==== Использованные методы")
+            .append(System.lineSeparator())
+            .append(System.lineSeparator());
+
+        stringBuilder.append("|====").append(System.lineSeparator());
+        stringBuilder.append("|Метод |Количество")
+            .append(System.lineSeparator());
+        for (Map.Entry<String, Long> entry : report.getTopRequestedMethods().entrySet()) {
+            stringBuilder.append(String.format("|`%s` | %,d", entry.getKey(), entry.getValue()))
+                .append(System.lineSeparator());
+        }
+        stringBuilder.append("|====").append(System.lineSeparator());
+        stringBuilder.append(System.lineSeparator());
+    }
+
+    private static void writingRequestedVersionsToAsciiDoc(StringBuilder stringBuilder, LogReport report) {
+        stringBuilder.append("==== Использованные версии")
+            .append(System.lineSeparator())
+            .append(System.lineSeparator());
+
+        stringBuilder.append("|====").append(System.lineSeparator());
+        stringBuilder.append("|Версия |Количество")
+            .append(System.lineSeparator());
+        for (Map.Entry<String, Long> entry : report.getTopRequestedVersions().entrySet()) {
+            stringBuilder.append(String.format("|`%s` | %,d", entry.getKey(), entry.getValue()))
+                .append(System.lineSeparator());
+        }
+        stringBuilder.append("|====").append(System.lineSeparator());
+        stringBuilder.append(System.lineSeparator());
     }
 }

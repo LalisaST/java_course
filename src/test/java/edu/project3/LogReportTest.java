@@ -20,8 +20,8 @@ public class LogReportTest {
     @DisplayName("Проверка функции getTotalRequests")
     void checkingGetTotalRequestsFunction() {
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 404, 150, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 404, 150, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
@@ -33,9 +33,9 @@ public class LogReportTest {
     @DisplayName("Проверка функции getTopRequestedResources")
     void checkingGetTopRequestedResources() {
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/path1", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/path2", 404, 150, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/path1", 200, 200, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path1", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path2", "HTTP/1.1", 404, 150, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path1", "HTTP/1.1", 200, 200, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
@@ -47,9 +47,9 @@ public class LogReportTest {
     @DisplayName("Проверка функции getTopResponseStatusCodes")
     void checkingGetTopResponseStatusCodes() {
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 404, 150, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 200, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 404, 150, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 200, 200, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
@@ -61,8 +61,8 @@ public class LogReportTest {
     @DisplayName("Проверка функции getAverageResponseSize")
     void checkingGetAverageResponseSize() {
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "/", 404, 150, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET","/", "HTTP/1.1", 404, 150, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
@@ -76,8 +76,8 @@ public class LogReportTest {
     void checkingGetStartDate() {
         OffsetDateTime now = OffsetDateTime.now();
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", now.minusDays(1), "/", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", now, "/", 404, 150, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", now.minusDays(1), "GET", "/", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", now, "GET", "/", "HTTP/1.1", 404, 150, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
@@ -90,12 +90,40 @@ public class LogReportTest {
     void checkingGetEndDate() {
         OffsetDateTime now = OffsetDateTime.now();
         List<LogRecord> logRecords = Arrays.asList(
-            new LogRecord("127.0.0.1", "-", now.minusDays(1), "/", 200, 100, "-", "userAgent"),
-            new LogRecord("127.0.0.1", "-", now, "/", 404, 150, "-", "userAgent")
+            new LogRecord("127.0.0.1", "-", now.minusDays(1), "GET", "/", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", now, "GET", "/", "HTTP/1.1",404, 150, "-", "userAgent")
         );
 
         LogReport logReport = new LogReport(logRecords);
 
         assertThat(logReport.getEndDate()).isEqualTo(now);
+    }
+
+    @Test
+    @DisplayName("Проверка функции getTopRequestedMethods")
+    void checkingGetTopRequestedMethods() {
+        List<LogRecord> logRecords = Arrays.asList(
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path1", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "HEAD", "/path2", "HTTP/1.1", 404, 150, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "HEAD", "/path1", "HTTP/1.1", 200, 200, "-", "userAgent")
+        );
+
+        LogReport logReport = new LogReport(logRecords);
+
+        assertThat(logReport.getTopRequestedMethods()).isEqualTo(Map.of("GET",1L, "HEAD", 2L));
+    }
+
+    @Test
+    @DisplayName("Проверка функции getTopRequestedVersions")
+    void checkingGetTopRequestedVersions() {
+        List<LogRecord> logRecords = Arrays.asList(
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path1", "HTTP/1.1", 200, 100, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path2", "HTTP/1.1", 404, 150, "-", "userAgent"),
+            new LogRecord("127.0.0.1", "-", OffsetDateTime.now(), "GET", "/path1", "HTTP/2.0", 200, 200, "-", "userAgent")
+        );
+
+        LogReport logReport = new LogReport(logRecords);
+
+        assertThat(logReport.getTopRequestedVersions()).isEqualTo(Map.of("HTTP/1.1",2L, "HTTP/2.0", 1L));
     }
 }

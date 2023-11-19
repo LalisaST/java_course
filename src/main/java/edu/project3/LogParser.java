@@ -15,6 +15,8 @@ class LogParser {
     private static final int SIX = 6;
     private static final int SEVEN = 7;
     private static final int EIGHT = 8;
+    private static final int NINE = 9;
+    private static final int TEN = 10;
 
     private LogParser() {
     }
@@ -27,20 +29,22 @@ class LogParser {
         DateTimeFormatter dateTimeFormatter =
             DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z").withLocale(Locale.ENGLISH);
         Pattern pattern = Pattern
-            .compile("^(.+) - (.+) \\[(.+)] \"(.+)\" (\\d+) (\\d+) \"(.+)\" \"(.+)\"$");
+            .compile("^(.+) - (.+) \\[(.+)] \"(.+) (.+) (.+)\" (\\d+) (\\d+) \"(.+)\" \"(.+)\"$");
         Matcher matcher = pattern.matcher(logLine);
 
         if (matcher.matches()) {
             String remoteAddr = matcher.group(ONE);
             String remoteUser = matcher.group(TWO);
             OffsetDateTime timeLocal = OffsetDateTime.parse(matcher.group(THREE), dateTimeFormatter);
-            String request = matcher.group(FOUR);
-            int status = Integer.parseInt(matcher.group(FIVE));
-            long bodyBytesSent = Long.parseLong(matcher.group(SIX));
-            String httpReferer = matcher.group(SEVEN);
-            String httpUserAgent = matcher.group(EIGHT);
+            String method = matcher.group(FOUR);
+            String request = matcher.group(FIVE);
+            String version = matcher.group(SIX);
+            int status = Integer.parseInt(matcher.group(SEVEN));
+            long bodyBytesSent = Long.parseLong(matcher.group(EIGHT));
+            String httpReferer = matcher.group(NINE);
+            String httpUserAgent = matcher.group(TEN);
 
-            return new LogRecord(remoteAddr, remoteUser, timeLocal, request, status, bodyBytesSent,
+            return new LogRecord(remoteAddr, remoteUser, timeLocal, method, request, version, status, bodyBytesSent,
                 httpReferer, httpUserAgent
             );
         } else {
