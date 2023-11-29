@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class FormatterDate {
-    static List<DateParserHandler> formatDateParsersList = new ArrayList<>();
+    private static List<DateParserHandler> formatDateParsersList = new ArrayList<>();
 
-    static {
+    /*static {
         formatDateParsersList.add(new FormatDateParser("yyyy-MM-dd"));
         formatDateParsersList.add(new FormatDateParser("d/M/yyyy"));
         formatDateParsersList.add(new FormatDateParser("d/M/yy"));
         formatDateParsersList.add(new FormatDateParser("yyyy-MM-d"));
         formatDateParsersList.add(new DaysAgoParser());
         formatDateParsersList.add(new RecentDayParser());
-    }
+    }*/
 
     private FormatterDate() {}
 
@@ -35,5 +35,9 @@ public class FormatterDate {
         }
 
         return optionalLocalDate;
+    }
+
+    public static void setNext(List<DateParserHandler> formatDateParsersList) {
+        FormatterDate.formatDateParsersList = formatDateParsersList;
     }
 }

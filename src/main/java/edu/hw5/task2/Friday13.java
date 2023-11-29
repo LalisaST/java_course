@@ -18,12 +18,11 @@ public class Friday13 {
         }
 
         List<LocalDate> dates = new ArrayList<>();
-        DayOfWeek day = DayOfWeek.FRIDAY;
 
         for (int i = 1; i <= NUMBER_OF_MONTHS; i++) {
             LocalDate date = LocalDate.of(year, i, DAY13);
 
-            if (day == date.getDayOfWeek()) {
+            if (date.getDayOfWeek() == DayOfWeek.FRIDAY) {
                 dates.add(date);
             }
         }

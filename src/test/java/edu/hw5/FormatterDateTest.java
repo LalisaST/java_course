@@ -1,8 +1,14 @@
 package edu.hw5;
 
+import edu.hw5.task3.DateParserHandler;
+import edu.hw5.task3.DaysAgoParser;
+import edu.hw5.task3.FormatDateParser;
 import edu.hw5.task3.FormatterDate;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import edu.hw5.task3.RecentDayParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,6 +41,15 @@ public class FormatterDateTest {
     @ParameterizedTest
     @MethodSource("provideDate")
     void checkingFormats(String date, Optional<LocalDate> optionalLocalDate) {
+        List<DateParserHandler> formatDateParsersList = new ArrayList<>();
+        formatDateParsersList.add(new FormatDateParser("yyyy-MM-dd"));
+        formatDateParsersList.add(new FormatDateParser("d/M/yyyy"));
+        formatDateParsersList.add(new FormatDateParser("d/M/yy"));
+        formatDateParsersList.add(new FormatDateParser("yyyy-MM-d"));
+        formatDateParsersList.add(new DaysAgoParser());
+        formatDateParsersList.add(new RecentDayParser());
+
+        FormatterDate.setNext(formatDateParsersList);
 
         assertThat(FormatterDate.parseDate(date)).isEqualTo(optionalLocalDate);
     }

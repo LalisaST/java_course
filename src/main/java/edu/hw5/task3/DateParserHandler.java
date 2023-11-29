@@ -3,6 +3,6 @@ package edu.hw5.task3;
 import java.time.LocalDate;
 import java.util.Optional;
 
-interface DateParserHandler {
+public interface DateParserHandler {
     Optional<LocalDate> parseDate(String dateString);
 }
