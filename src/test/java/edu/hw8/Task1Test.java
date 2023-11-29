@@ -24,6 +24,7 @@ public class Task1Test {
 
         Thread thread = new Thread(Server::start);
         thread.start();
+        Thread.sleep(1000);
 
         String result = Client.start("личности");
 
@@ -39,6 +40,7 @@ public class Task1Test {
 
         Thread thread = new Thread(Server::start);
         thread.start();
+        Thread.sleep(1000);
 
         String result = Client.start("a");
 
@@ -54,6 +56,7 @@ public class Task1Test {
 
         Thread thread = new Thread(Server::start);
         thread.start();
+        Thread.sleep(1000);
 
         String result1 = Client.start("глупый");
         String result2 = Client.start("и");
