@@ -35,14 +35,14 @@ public interface Renderer {
         return new Point(x, y);
     }
 
-    static Point applyAffine(AffineTransformations affine, Point p) {
+    private static Point applyAffine(AffineTransformations affine, Point p) {
         double x = affine.a() * p.x() + affine.b() * p.y() + affine.c();
         double y = affine.d() * p.x() + affine.e() * p.y() + affine.f();
 
         return new Point(x, y);
     }
 
-    static void coloring(Pixel pixel, AffineTransformations affine) {
+    private static void coloring(Pixel pixel, AffineTransformations affine) {
         if (pixel == null) {
             throw new IllegalArgumentException();
         }
@@ -63,7 +63,7 @@ public interface Renderer {
         pixel.setHitCount(counter + 1);
     }
 
-    static void mapRange(Point point, FractalImage canvas, AffineTransformations affine) {
+     private static void mapRange(Point point, FractalImage canvas, AffineTransformations affine) {
 
         int x = canvas.width() - (int) (((MAX_P.x() - point.x()) / (MAX_P.x() - MIN_P.x())) * canvas.width());
         int y = canvas.height() - (int) (((MAX_P.y() - point.y()) / (MAX_P.y() - MIN_P.y())) * canvas.height());
@@ -71,7 +71,7 @@ public interface Renderer {
         if (x < canvas.width() && y < canvas.height()) {
 
             if (canvas.pixel(x, y) != null) {
-                Renderer.coloring(canvas.pixel(x, y), affine);
+                coloring(canvas.pixel(x, y), affine);
             }
         }
     }
@@ -86,11 +86,11 @@ public interface Renderer {
         List<Transformation> variations
     ) {
         for (int num = 0; num < iterationsPerThread; ++num) {
-            Point pw = Renderer.random(random);
+            Point pw = random(random);
 
             for (int step = -SKIP_ITER; step < iterPerSample; ++step) {
                 int affineRand = random.nextInt(0, affine.length);
-                pw = Renderer.applyAffine(affine[affineRand], pw);
+                pw = applyAffine(affine[affineRand], pw);
 
                 Transformation variation = variations.get(random.nextInt(variations.size()));
                 pw = variation.apply(pw);
@@ -103,7 +103,7 @@ public interface Renderer {
 
                         if (pwr.x() >= MIN_P.x() && pwr.x() <= MAX_P.x()
                             && pwr.y() >= MIN_P.y() && pwr.y() <= MAX_P.y()) {
-                            Renderer.mapRange(pwr, canvas, affine[affineRand]);
+                            mapRange(pwr, canvas, affine[affineRand]);
                         }
                     }
                 }
