@@ -44,7 +44,7 @@ public class Task1Test {
 
         String result = Client.start("a");
 
-        assertThat(result).isEqualTo("Сервер: Неизветсное ключевое слово");
+        assertThat(result).isEqualTo("Сервер: Неизвестное ключевое слово");
 
         Server.stop();
         thread.join();
@@ -65,7 +65,7 @@ public class Task1Test {
         thread.join();
 
         assertThat(result1).isEqualTo("Сервер: А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.");
-        assertThat(result2).isEqualTo("Сервер: Неизветсное ключевое слово");
+        assertThat(result2).isEqualTo("Сервер: Неизвестное ключевое слово");
     }
 
 }
