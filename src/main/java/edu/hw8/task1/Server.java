@@ -77,7 +77,7 @@ public class Server {
     }
 
     private static String getResponse(String keyword) {
-        return QUOTES.getOrDefault(keyword, "Неизветсное ключевое слово");
+        return QUOTES.getOrDefault(keyword, "Неизвестное ключевое слово");
     }
 
 }
