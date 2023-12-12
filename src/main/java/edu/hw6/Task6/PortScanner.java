@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 @SuppressWarnings("MagicNumber")
 public class PortScanner {
     private final static Logger LOGGER = LogManager.getLogger();
+    private final static int MAX_PORT = 49151;
 
     static Map<Integer, String> knownPorts = new HashMap<>();
     static final String TCP = "TCP";
@@ -36,17 +37,14 @@ public class PortScanner {
 
     public static void portScanning() {
 
-
-        for (int i = 0; i <= 49151; i++) {
-            try (ServerSocket serverSocket = new ServerSocket(i)) {
-                serverSocket.close();
+        for (int i = 0; i <= MAX_PORT; i++) {
+            try (ServerSocket ignored = new ServerSocket(i)) {
                 printInfo(true, i, TCP);
             } catch (IOException e) {
                 printInfo(false, i, TCP);
             }
 
-            try (DatagramSocket datagramSocket = new DatagramSocket(i)) {
-                datagramSocket.close();
+            try (DatagramSocket ignored = new DatagramSocket(i)) {
                 printInfo(true, i, UDP);
             } catch (IOException e) {
                 printInfo(false, i, UDP);

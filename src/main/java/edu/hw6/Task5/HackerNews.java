@@ -10,12 +10,14 @@ import java.util.regex.Pattern;
 import static java.net.http.HttpClient.newHttpClient;
 
 public class HackerNews {
+    private static final String HACKER_NEWS_LINK = "https://hacker-news.firebaseio.com/v0/";
+
     private HackerNews() {
     }
 
     public static long[] hackerNewsTopStories() {
 
-        String resultStr = getRequest("https://hacker-news.firebaseio.com/v0/topstories.json");
+        String resultStr = getRequest(HACKER_NEWS_LINK + "topstories.json");
 
         if (resultStr == null || resultStr.equals("null")) {
             return new long[0];
@@ -36,7 +38,11 @@ public class HackerNews {
     }
 
     public static String news(long id) {
-        String body = getRequest("https://hacker-news.firebaseio.com/v0/item/" + id + ".json");
+        String body = getRequest(HACKER_NEWS_LINK + "item/" + id + ".json");
+        if (body == null) {
+            throw new IllegalArgumentException();
+        }
+
         Pattern pattern = Pattern.compile("^.*\"title\":\"(.*)\",\"type\".*$");
         Matcher matcher = pattern.matcher(body);
 

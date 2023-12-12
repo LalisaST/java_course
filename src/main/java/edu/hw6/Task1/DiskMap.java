@@ -2,11 +2,10 @@ package edu.hw6.Task1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +25,9 @@ public class DiskMap implements Map<String, String> {
         this.fileName = fileName;
 
         try {
-            Files.createFile(Path.of(fileName));
-        } catch (IOException ignored) {
-
+            new File(fileName).createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         this.memoryMap = new HashMap<>();
