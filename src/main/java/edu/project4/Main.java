@@ -45,7 +45,7 @@ public class Main {
         LOGGER.info("Threads: " + 1 + ", Time: " + duration1 + " ms");
 
         for (int numOfThreads = 5; numOfThreads <= 15; numOfThreads++) {
-            Renderer rendererM = new MultiThreadedRenderer(12);
+            Renderer rendererM = new MultiThreadedRenderer(numOfThreads);
 
             long startTime = System.nanoTime();
 
