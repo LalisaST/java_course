@@ -12,7 +12,7 @@ public class SearcherFileByPredicateTest {
     @DisplayName("Ввод некорректных значений")
     void enteringIncorrectValues() {
 
-        assertThatThrownBy(() -> new SearcherFileByPredicate(new File("src/test"), null)).isInstanceOf(
+        assertThatThrownBy(() -> new SearcherFileByPredicate(new File("src/test/java/edu/hw9/task2/testData"), null)).isInstanceOf(
             IllegalArgumentException.class);
 
         assertThatThrownBy(() -> new SearcherFileByPredicate(null, file -> file.length() > 20000)).isInstanceOf(
@@ -23,8 +23,8 @@ public class SearcherFileByPredicateTest {
     @DisplayName("Проверка поиска")
     void checkingSearch() {
         Searcher searcher = new Searcher();
-        List<File> result = searcher.searchingFileByPredicate(5600, ".java", new File("src/test"));
+        List<File> result = searcher.searchingFileByPredicate(20, ".txt", new File("src/test/java/edu/hw9/task2/testData"));
 
-        assertThat(result.size()).isEqualTo(4);
+        assertThat(result.size()).isEqualTo(2);
     }
 }

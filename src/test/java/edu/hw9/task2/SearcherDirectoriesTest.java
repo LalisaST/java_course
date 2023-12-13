@@ -11,7 +11,7 @@ public class SearcherDirectoriesTest {
     @Test
     @DisplayName("Ввод некорректных значений")
     void enteringIncorrectValues() {
-        assertThatThrownBy(() -> new SearcherDirectories(0 , new File("src/test"))).isInstanceOf(
+        assertThatThrownBy(() -> new SearcherDirectories(0 , new File("src/test/java/edu/hw9/task2/testData"))).isInstanceOf(
             IllegalArgumentException.class);
 
         assertThatThrownBy(() -> new SearcherDirectories(1 , null)).isInstanceOf(
@@ -22,8 +22,8 @@ public class SearcherDirectoriesTest {
     @DisplayName("Проверка поиска")
     void checkingSearch() {
         Searcher searcher = new Searcher();
-        List<File> result = searcher.searchingDirectories(8, new File("src/test"));
+        List<File> result = searcher.searchingDirectories(2, new File("src/test/java/edu/hw9/task2/testData"));
 
-        assertThat(result.size()).isEqualTo(3);
+        assertThat(result.size()).isEqualTo(1);
     }
 }
