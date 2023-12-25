@@ -3,10 +3,10 @@ package edu.project2;
 import java.util.Objects;
 
 public class Point {
-    int y;
-    int x;
+    public int y;
+    public int x;
 
-    Point(int y, int x) {
+    public Point(int y, int x) {
         this.y = y;
         this.x = x;
     }
